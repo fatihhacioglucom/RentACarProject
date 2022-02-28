@@ -22,7 +22,7 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.CarName.Length < 2 && car.DailyPrice < 0)
+            if (car.Description.Length < 2 && car.DailyPrice < 0)
             {
                 return new ErrorResult();
             }
