@@ -3,6 +3,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.Description.Length < 2 && car.DailyPrice < 0)
+            if (car.CarName.Length < 2 && car.DailyPrice < 0)
             {
                 return new ErrorResult();
             }
@@ -44,6 +45,11 @@ namespace Business.Concrete
         public IDataResult<List<Car>> GetById(int carId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.CarId == carId));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
